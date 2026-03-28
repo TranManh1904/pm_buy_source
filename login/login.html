@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+ </head>
+ <body>
+  <main class="login-wrap">
+   <div class="login-card">
+    <div class="login-brand">ManhDev</div>
+    <h1 class="login-title">Đăng nhập Admin</h1>
+    <p class="login-subtitle">Tạm thời demo: admin / admin</p>
+    <form id="loginForm" class="login-form" autocomplete="off">
+     <div class="form-group">
+      <label class="form-label" for="username">Tài khoản</label>
+      <input class="form-input" id="username" type="text" placeholder="admin" required>
+     </div>
+     <div class="form-group">
+      <label class="form-label" for="password">Mật khẩu</label>
+      <input class="form-input" id="password" type="password" placeholder="admin" required>
+     </div>
+     <div class="login-error" id="loginError" style="display:none;"></div>
+     <button class="btn-primary" type="submit">Đăng nhập</button> <!--khi ấn nút submit -> chuyển qua file login.js ở dòng 23 để thực hiện sự kiện-->
+    </form>
+    <a class="login-back" href="../index.html">← Quay về trang chủ</a>
+   </div>
+  </main>
+  <script defer src="../auth.js"></script>
+  <script defer src="login.js"></script>
+ </body>
+</html>

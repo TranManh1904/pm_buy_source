@@ -54,6 +54,8 @@ const translations = {
     'nav.admin': 'Admin',
     'nav.adminDashboard': 'Admin Dashboard',
     'nav.settings': 'Settings',
+    'nav.login': 'Login',
+    'nav.logout': 'Logout',
     'hero.badge': 'Available for projects',
     'hero.btnCourses': 'View Courses',
     'hero.btnSource': 'Buy Source Code',
@@ -90,6 +92,10 @@ const translations = {
     'settings.subtitle': 'Choose language',
     'settings.languageLabel': 'Language',
     'settings.save': 'Save',
+    'menu.theme': 'Toggle Light/Dark',
+    'menu.langVi': 'Vietnamese',
+    'menu.langEn': 'English',
+    'menu.logout': 'Logout',
     'payment.sample': '⚠ Sample / Demo',
     'payment.title': 'Payment Details',
     'payment.subtitle': 'Complete your purchase',
@@ -119,6 +125,8 @@ const translations = {
     'nav.admin': 'Admin',
     'nav.adminDashboard': 'Bảng quản trị',
     'nav.settings': 'Cài đặt',
+    'nav.login': 'Đăng nhập',
+    'nav.logout': 'Đăng xuất',
     'hero.badge': 'Sẵn sàng nhận dự án',
     'hero.btnCourses': 'Xem khóa học',
     'hero.btnSource': 'Mua mã nguồn',
@@ -155,6 +163,10 @@ const translations = {
     'settings.subtitle': 'Tuỳ chọn ngôn ngữ',
     'settings.languageLabel': 'Ngôn ngữ',
     'settings.save': 'Lưu',
+    'menu.theme': 'Chế độ sáng/tối',
+    'menu.langVi': 'Tiếng Việt',
+    'menu.langEn': 'English',
+    'menu.logout': 'Đăng xuất',
     'payment.sample': '⚠ Bản mẫu / Demo',
     'payment.title': 'Thông tin thanh toán',
     'payment.subtitle': 'Hoàn tất mua hàng',
@@ -196,6 +208,40 @@ function t(key) {
   return translations[lang]?.[key] ?? translations.en[key] ?? key;
 }
 
+function updateAuthUI() {
+  const isLoggedIn = window.Auth && typeof window.Auth.isLoggedIn === 'function' ? window.Auth.isLoggedIn() : false;
+  const labelKey = isLoggedIn ? 'nav.logout' : 'nav.login';
+
+  const btnText = document.getElementById('authBtnText');
+  if (btnText) btnText.textContent = t(labelKey);
+
+  const mobileText = document.getElementById('authMenuMobileText');
+  if (mobileText) mobileText.textContent = t(labelKey);
+
+  const iconWrap = document.getElementById('authBtnIcon');
+  if (iconWrap) {
+    iconWrap.innerHTML = isLoggedIn
+      ? '<i data-lucide="log-out" style="width:16px; height:16px;"></i>'
+      : '<i data-lucide="log-in" style="width:16px; height:16px;"></i>';
+  }
+
+  const userMenuLi = document.getElementById('userMenuLi');
+  const authBtn = document.getElementById('authBtn');
+  if (userMenuLi && authBtn) {
+    userMenuLi.style.display = isLoggedIn ? 'list-item' : 'none';
+    authBtn.style.display = isLoggedIn ? 'none' : 'inline-flex';
+  }
+
+  const themeText = document.getElementById('menuThemeText');
+  if (themeText) themeText.textContent = t('menu.theme');
+  const logoutText = document.getElementById('menuLogoutText');
+  if (logoutText) logoutText.textContent = t('menu.logout');
+  const langVi = document.getElementById('menuLangVi');
+  if (langVi) langVi.textContent = t('menu.langVi');
+  const langEn = document.getElementById('menuLangEn');
+  if (langEn) langEn.textContent = t('menu.langEn');
+}
+
 // ===== ÁP DỤNG NGÔN NGỮ =====
 // Cài đặt -> chọn ngôn ngữ -> applyLanguage() sẽ:
 // 1) lưu lang vào localStorage; 2) cập nhật text [data-i18n];
@@ -220,6 +266,7 @@ function applyLanguage(lang) {
   applyConfig(languageConfig[window.__lang] || {});
   renderCards('coursesGrid', coursesData, 'course');
   renderCards('sourceGrid', sourceData, 'source');
+  updateAuthUI();
   lucide.createIcons();
 }
 
@@ -422,6 +469,39 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('darkToggle').addEventListener('click', toggleDarkMode);
   document.getElementById('darkToggleMobile').addEventListener('click', toggleDarkMode);
 
+  // USER MENU: avatar dropdown
+  const avatarBtn = document.getElementById('userAvatarBtn');
+  const userDropdown = document.getElementById('userDropdown');
+  if (avatarBtn && userDropdown) {
+    avatarBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = userDropdown.classList.toggle('open');
+      avatarBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      lucide.createIcons();
+    });
+    document.addEventListener('click', (e) => {
+      if (!userDropdown.contains(e.target) && e.target !== avatarBtn) {
+        userDropdown.classList.remove('open');
+        avatarBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+  const menuDarkToggle = document.getElementById('menuDarkToggle');
+  if (menuDarkToggle) menuDarkToggle.addEventListener('click', () => { toggleDarkMode(); lucide.createIcons(); });
+  const menuLangVi = document.getElementById('menuLangVi');
+  if (menuLangVi) menuLangVi.addEventListener('click', () => { applyLanguage('vi'); updateAuthUI(); });
+  const menuLangEn = document.getElementById('menuLangEn');
+  if (menuLangEn) menuLangEn.addEventListener('click', () => { applyLanguage('en'); updateAuthUI(); });
+  const menuLogout = document.getElementById('menuLogout');
+  if (menuLogout) menuLogout.addEventListener('click', () => {
+    if (window.Auth && typeof window.Auth.logout === 'function') window.Auth.logout();
+    const overlay = document.getElementById('adminOverlay');
+    if (overlay) overlay.classList.remove('open');
+    updateAuthUI();
+    lucide.createIcons();
+    const dd = document.getElementById('userDropdown'); if (dd) dd.classList.remove('open');
+  });
+
   // CÀI ĐẶT: mở/đóng modal và lưu ngôn ngữ
   const openSettings = () => {
     document.getElementById('settingsModal').classList.add('open');
@@ -429,23 +509,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (select) select.value = window.__lang || 'en';
     lucide.createIcons();
   };
-  document.getElementById('settingsBtn').addEventListener('click', openSettings);
-  document.getElementById('settingsBtnMobile').addEventListener('click', openSettings);
-  document.getElementById('settingsMenuMobile').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('mobileMenu').classList.remove('open');
-    openSettings();
+  const sb_ = document.getElementById('settingsBtn');
+  if (sb_) sb_.addEventListener('click', openSettings);
+  const sbm_ = document.getElementById('settingsBtnMobile');
+  if (sbm_) sbm_.addEventListener('click', openSettings);
+  const smm_ = document.getElementById('settingsMenuMobile');
+  if (smm_) smm_.addEventListener('click', (e) => {
+      e.preventDefault();
+      const mm = document.getElementById('mobileMenu'); if (mm) mm.classList.remove('open');
+      openSettings();
   });
-  document.getElementById('settingsClose').addEventListener('click', () => {
-    document.getElementById('settingsModal').classList.remove('open');
+  const sc_ = document.getElementById('settingsClose');
+  if (sc_) sc_.addEventListener('click', () => {
+    const smodal = document.getElementById('settingsModal'); if (smodal) smodal.classList.remove('open');
   });
-  document.getElementById('settingsModal').addEventListener('click', (e) => {
+  const smodal_ = document.getElementById('settingsModal');
+  if (smodal_) smodal_.addEventListener('click', (e) => {
     if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
   });
-  document.getElementById('settingsSave').addEventListener('click', () => {
-    const lang = document.getElementById('languageSelect').value;
-    applyLanguage(lang); // Gọi hàm áp dụng ngôn ngữ
-    document.getElementById('settingsModal').classList.remove('open');
+  const ss_ = document.getElementById('settingsSave');
+  if (ss_) ss_.addEventListener('click', () => {
+    const sel = document.getElementById('languageSelect');
+    const lang = sel ? sel.value : 'en';
+    applyLanguage(lang);
+    const sm = document.getElementById('settingsModal'); if (sm) sm.classList.remove('open');
   });
 
   // MUA HÀNG
@@ -472,16 +559,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // LOGIN/LOGOUT: cập nhật nút theo trạng thái đăng nhập
+  updateAuthUI();
+  const handleAuthClick = () => {
+    if (window.Auth && typeof window.Auth.isLoggedIn === 'function' && window.Auth.isLoggedIn()) {
+      if (typeof window.Auth.logout === 'function') window.Auth.logout();
+      const overlay = document.getElementById('adminOverlay');
+      if (overlay) overlay.classList.remove('open');
+      updateAuthUI();
+      lucide.createIcons();
+      return;
+    }
+    if (window.Auth && typeof window.Auth.gotoLogin === 'function') {
+      window.Auth.gotoLogin({ returnUrl: window.location.href });
+      return;
+    }
+    window.location.href = 'login/login.html';
+  };
+  const authBtn = document.getElementById('authBtn');
+  if (authBtn) authBtn.addEventListener('click', handleAuthClick);
+  const authMenuMobile = document.getElementById('authMenuMobile');
+  if (authMenuMobile) {
+    authMenuMobile.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('mobileMenu').classList.remove('open');
+      handleAuthClick();
+    });
+  }
+
   // ADMIN OVERLAY
-  document.getElementById('adminBtn').addEventListener('click', () => {
+  const openAdminOverlay = () => {
     document.getElementById('adminOverlay').classList.add('open');
     lucide.createIcons();
-  });
+  };
+  const gotoLogin = () => {
+    if (window.Auth && typeof window.Auth.gotoLogin === 'function') {
+      window.Auth.gotoLogin({ returnUrl: window.location.href });
+      return;
+    }
+    window.location.href = 'login/login.html';
+  };
+  const handleAdminClick = () => {
+    if (window.Auth && typeof window.Auth.isLoggedIn === 'function' && window.Auth.isLoggedIn()) {
+      openAdminOverlay();
+      return;
+    }
+    gotoLogin();
+  };
+
+  document.getElementById('adminBtn').addEventListener('click', handleAdminClick);
   document.getElementById('adminBtnMobile').addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('adminOverlay').classList.add('open');
-    lucide.createIcons();
+    handleAdminClick();
   });
   document.getElementById('adminClose').addEventListener('click', () => {
     document.getElementById('adminOverlay').classList.remove('open');

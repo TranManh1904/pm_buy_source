@@ -21,14 +21,33 @@
      <li><a href="#courses" data-i18n="nav.courses">Courses</a></li>
      <li><a href="#source-code" data-i18n="nav.source">Source Code</a></li>
      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-     <li><button class="dark-toggle" id="settingsBtn" aria-label="Settings"> <i data-lucide="settings" style="width:18px; height:18px;"></i> </button></li>
-     <li><button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode"> <i data-lucide="sun" style="width:18px; height:18px;"></i> </button></li>
+     
+     <li id="userMenuLi" style="display:none;">
+      <div class="user-menu" id="userMenu">
+       <button class="avatar-btn" id="userAvatarBtn" aria-haspopup="true" aria-expanded="false">
+        <span class="avatar-initials">AD</span>
+       </button>
+       <div class="user-dropdown" id="userDropdown" role="menu" aria-label="User menu">
+        <button class="user-item" id="menuDarkToggle"><i data-lucide="moon" style="width:16px; height:16px;"></i> <span id="menuThemeText">Chế độ sáng/tối</span></button>
+        <div class="user-sep"></div>
+        <button class="user-item" id="menuLangVi"><span>Tiếng Việt</span></button>
+        <button class="user-item" id="menuLangEn"><span>English</span></button>
+        <div class="user-sep"></div>
+        <button class="user-item" id="menuLogout"><i data-lucide="log-out" style="width:16px; height:16px;"></i> <span id="menuLogoutText">Đăng xuất</span></button>
+       </div>
+      </div>
+     </li>
+     <li><button class="btn-secondary" style="padding:8px 18px; font-size:0.8rem;" id="authBtn"> <span id="authBtnIcon"><i data-lucide="log-in" style="width:16px; height:16px;"></i></span> <span id="authBtnText">Đăng nhập</span> </button></li>
      <li><button class="btn-primary" style="padding:8px 18px; font-size:0.8rem;" id="adminBtn"> <i data-lucide="layout-dashboard" style="width:16px; height:16px;"></i> <span data-i18n="nav.admin">Admin</span> </button></li>
     </ul>
-    <div style="display:flex; gap:8px; align-items:center;"><button class="dark-toggle" id="settingsBtnMobile" aria-label="Settings"> <i data-lucide="settings" style="width:18px; height:18px;"></i> </button> <button class="dark-toggle" id="darkToggleMobile" aria-label="Toggle dark mode" style="display:none;"> <i data-lucide="sun" style="width:18px; height:18px;"></i> </button> <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"> <i data-lucide="menu" style="width:24px; height:24px;"></i> </button>
+    <div style="display:flex; gap:8px; align-items:center;"> <button class="dark-toggle" id="darkToggleMobile" aria-label="Toggle dark mode" style="display:none;"> <i data-lucide="sun" style="width:18px; height:18px;"></i> </button> <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"> <i data-lucide="menu" style="width:24px; height:24px;"></i> </button>
     </div>
    </div>
-   <div class="mobile-menu" id="mobileMenu" role="menu"><a href="#home" data-i18n="nav.home">Home</a> <a href="#about" data-i18n="nav.about">About</a> <a href="#courses" data-i18n="nav.courses">Courses</a> <a href="#source-code" data-i18n="nav.source">Source Code</a> <a href="#contact" data-i18n="nav.contact">Contact</a> <a href="#" id="settingsMenuMobile" data-i18n="nav.settings">Settings</a> <a href="#" id="adminBtnMobile" style="color:var(--accent-2);" data-i18n="nav.adminDashboard">Admin Dashboard</a>
+
+   <!--Nơi lưu thanh header-->>
+
+   
+   <div class="mobile-menu" id="mobileMenu" role="menu"><a href="#home" data-i18n="nav.home">Home</a> <a href="#about" data-i18n="nav.about">About</a> <a href="#courses" data-i18n="nav.courses">Courses</a> <a href="#source-code" data-i18n="nav.source">Source Code</a> <a href="#contact" data-i18n="nav.contact">Contact</a> <a href="#" id="settingsMenuMobile" data-i18n="nav.settings">Settings</a> <a href="#" id="authMenuMobile"><span id="authMenuMobileText">Đăng nhập</span></a> <a href="#" id="adminBtnMobile" style="color:var(--accent-2);" data-i18n="nav.adminDashboard">Admin Dashboard</a>
    </div>
   </nav>
   <main><!-- Hero -->
@@ -224,7 +243,7 @@
         <div>
          <div class="contact-info-label" data-i18n="contact.phoneLabel">Phone / Zalo</div>
          <div class="contact-info-value" id="contactPhone">
-          0865853943
+          0923397935
          </div>
         </div>
        </div>
@@ -323,10 +342,10 @@
        <span class="bank-label" data-i18n="payment.bank.content">Content</span><span class="bank-value" id="bankContent">—</span>
       </div>
      </div>
-     <p style="margin-top:12px; color:var(--text-secondary); font-size:0.8rem; text-align:center;" data-i18n="payment.demoNote">This is demo banking info. Contact Zalo: 0865853943 for real payment.</p>
+     <p style="margin-top:12px; color:var(--text-secondary); font-size:0.8rem; text-align:center;" data-i18n="payment.demoNote">This is demo banking info. Contact Zalo: 0923397935 for real payment.</p>
     </div>
     <div style="margin-top:20px; text-align:center;">
-     <p style="color:var(--text-secondary); font-size:0.85rem;"><span data-i18n="payment.help">Need help? Contact Zalo:</span> <strong>0865853943</strong></p>
+     <p style="color:var(--text-secondary); font-size:0.85rem;"><span data-i18n="payment.help">Need help? Contact Zalo:</span> <strong>0923397935</strong></p>
     </div>
    </div>
   </div><!-- Admin Dashboard -->
@@ -464,6 +483,7 @@
   <div class="toast" id="toast">
    <i data-lucide="check-circle" style="width:18px; height:18px;"></i> <span id="toastMsg"></span>
   </div>
+  <script defer src="auth.js"></script>
   <script defer src="conifg.js"></script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e22bc7ee0d830fc',t:'MTc3NDQ5MjI1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

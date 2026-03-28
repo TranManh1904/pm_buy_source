@@ -1,0 +1,94 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: radial-gradient(ellipse at 30% 20%, rgba(108,92,231,0.22) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(0,206,201,0.16) 0%, transparent 50%),
+              #0a0a1a;
+  color: #e8e8f0;
+}
+
+.login-wrap {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(18, 18, 42, 0.85);
+  border: 1px solid rgba(108, 92, 231, 0.25);
+  border-radius: 18px;
+  padding: 28px;
+  backdrop-filter: blur(18px);
+}
+
+.login-brand {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #00cec9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.login-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  color: rgba(232,232,240,0.72);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+
+.login-form { display: flex; flex-direction: column; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.9rem; color: rgba(232,232,240,0.82); }
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(108, 92, 231, 0.22);
+  background: rgba(10, 10, 26, 0.65);
+  color: #e8e8f0;
+  outline: none;
+}
+.form-input:focus { border-color: rgba(108, 92, 231, 0.55); }
+
+.login-error {
+  background: rgba(255, 77, 79, 0.12);
+  border: 1px solid rgba(255, 77, 79, 0.35);
+  color: #ffb3b4;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  margin-top: 6px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+}
+.btn-primary:hover { filter: brightness(1.05); }
+
+.login-back {
+  display: inline-block;
+  margin-top: 14px;
+  color: rgba(232,232,240,0.78);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.login-back:hover { color: #a29bfe; }
