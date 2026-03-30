@@ -83,6 +83,38 @@ class XuLyYeuCau(BaseHTTPRequestHandler):
         if self.path == "/api/status":
             self.gui_json(200, {"trang_thai": "ok"})
             return
+
+        # Serve static files
+        root = pathlib.Path(__file__).resolve().parent
+        
+        # Map path tới file
+        if self.path == "/" or self.path == "":
+            file_path = root / "index.html"
+        else:
+            # Bỏ dấu / ở đầu
+            file_path = root / self.path.lstrip("/")
+
+        if file_path.exists() and file_path.is_file():
+            # Xác định content type
+            ext = file_path.suffix.lower()
+            content_types = {
+                ".html": "text/html; charset=utf-8",
+                ".css": "text/css",
+                ".js": "application/javascript",
+                ".png": "image/png",
+                ".jpg": "image/jpeg",
+                ".ico": "image/x-icon",
+            }
+            ct = content_types.get(ext, "application/octet-stream")
+            data = file_path.read_bytes()
+            self.send_response(200)
+            self.thiet_lap_cors()
+            self.send_header("Content-Type", ct)
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return
+
         self.gui_json(404, {"loi": "khong_tim_thay"})
 
     def do_POST(self):
