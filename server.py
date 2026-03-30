@@ -88,11 +88,14 @@ class XuLyYeuCau(BaseHTTPRequestHandler):
         root = pathlib.Path(__file__).resolve().parent
         
         # Map path tới file
-        if self.path == "/" or self.path == "":
+        # Bỏ query string
+        clean_path = self.path.split("?")[0]
+
+        # Map path tới file
+        if clean_path == "/" or clean_path == "":
             file_path = root / "index.html"
         else:
-            # Bỏ dấu / ở đầu
-            file_path = root / self.path.lstrip("/")
+            file_path = root / clean_path.lstrip("/")
 
         if file_path.exists() and file_path.is_file():
             # Xác định content type
