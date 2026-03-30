@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taiKhoan = inputTaiKhoan.value.trim();
     const matKhau = inputMatKhau.value;
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/login', {
+      const res = await fetch('https://pmbuysource-production.up.railway.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: taiKhoan, password: matKhau }),

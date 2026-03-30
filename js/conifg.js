@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!secret || !username || !pw || !cf) { msg.textContent = 'Điền đầy đủ thông tin.'; return; }
       if (pw !== cf) { msg.textContent = 'Mật khẩu xác nhận không khớp.'; return; }
       try {
-        const res = await fetch('http://127.0.0.1:8001/api/admin/reset-password', {
+        const res = await fetch('https://pmbuysource-production.up.railway.app/api/admin/reset-password', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': secret },
           body: JSON.stringify({ username, new_password: pw }),
