@@ -132,7 +132,12 @@ class XuLyYeuCau(BaseHTTPRequestHandler):
         if self.path == "/api/login":
             tai_khoan = str(du_lieu.get("username", "")).strip()
             mat_khau = str(du_lieu.get("password", "")).strip()
-            nguoi_dung = tim_nguoi_dung_db(tai_khoan, mat_khau)
+            try:
+                nguoi_dung = tim_nguoi_dung_db(tai_khoan, mat_khau)
+            except Exception as e:
+                print(f"LOI LOGIN: {e}", flush=True)
+                self.gui_json(500, {"loi": str(e)})
+                return
             if isinstance(nguoi_dung, dict):
                 token = str(uuid.uuid4())
                 self.gui_json(200, {"thanh_cong": True, "token": token, "user": nguoi_dung})
@@ -140,6 +145,7 @@ class XuLyYeuCau(BaseHTTPRequestHandler):
                 if nguoi_dung is None:
                     self.gui_json(200, {"thanh_cong": False})
                 else:
+                    print(f"LOI LOGIN DB: {nguoi_dung}", flush=True)
                     self.gui_json(500, {"loi": nguoi_dung})
             return
 
