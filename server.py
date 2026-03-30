@@ -193,9 +193,9 @@ class XuLyYeuCau(BaseHTTPRequestHandler):
 
 def chay_may_chu():
     tai_env_tu_file()
-    host = os.environ.get("API_HOST") or os.environ.get("SERVER_HOST") or "127.0.0.1"
+    host = "0.0.0.0"  # đổi thành này
     try:
-        port = int(os.environ.get("API_PORT") or os.environ.get("SERVER_PORT") or "8001")
+        port = int(os.environ.get("PORT") or "8001")  # Railway dùng biến PORT
     except Exception:
         port = 8001
     server = ThreadingHTTPServer((host, port), XuLyYeuCau)
