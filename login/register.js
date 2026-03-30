@@ -10,7 +10,7 @@ form.addEventListener('submit', async (e) => {
   const confirm = document.getElementById('confirm').value;
   if (password !== confirm) { showErr('Mật khẩu xác nhận không khớp.'); return; }
   try {
-    const res = await fetch('http://127.0.0.1:8001/api/register', {
+    const res = await fetch('https://pmbuysource-production.up.railway.app/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
