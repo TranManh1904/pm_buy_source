@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ManhDev - Full-stack Developer</title>
-  <script src="/_sdk/element_sdk.js"></script>
+  
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  
  </head>
- <body class="h-full" style="overflow-y: auto;"><!-- Navbar -->
+<body class="h-full">
+  <!-- Navbar -->
   <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
    <div class="nav-inner"><a href="#home" class="logo">ManhDev</a>
     <ul class="nav-links">
@@ -21,30 +22,29 @@
      <li><a href="#courses" data-i18n="nav.courses">Courses</a></li>
      <li><a href="#source-code" data-i18n="nav.source">Source Code</a></li>
      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-     
-     <li id="userMenuLi" style="display:none;">
-      <div class="user-menu" id="userMenu">
-       <button class="avatar-btn" id="userAvatarBtn" aria-haspopup="true" aria-expanded="false">
-        <span class="avatar-initials">AD</span>
-       </button>
-       <div class="user-dropdown" id="userDropdown" role="menu" aria-label="User menu">
-        <button class="user-item" id="menuDarkToggle"><i data-lucide="moon" style="width:16px; height:16px;"></i> <span id="menuThemeText">Chế độ sáng/tối</span></button>
-        <div class="user-sep"></div>
-        <button class="user-item" id="menuLangVi"><span>Tiếng Việt</span></button>
-        <button class="user-item" id="menuLangEn"><span>English</span></button>
-        <div class="user-sep"></div>
-        <button class="user-item" id="menuLogout"><i data-lucide="log-out" style="width:16px; height:16px;"></i> <span id="menuLogoutText">Đăng xuất</span></button>
-       </div>
-      </div>
-     </li>
-     <li><button class="btn-secondary" style="padding:8px 18px; font-size:0.8rem;" id="authBtn"> <span id="authBtnIcon"><i data-lucide="log-in" style="width:16px; height:16px;"></i></span> <span id="authBtnText">Đăng nhập</span> </button></li>
      <li><button class="btn-primary" style="padding:8px 18px; font-size:0.8rem;" id="adminBtn"> <i data-lucide="layout-dashboard" style="width:16px; height:16px;"></i> <span data-i18n="nav.admin">Admin</span> </button></li>
     </ul>
-    <div style="display:flex; gap:8px; align-items:center;"> <button class="dark-toggle" id="darkToggleMobile" aria-label="Toggle dark mode" style="display:none;"> <i data-lucide="sun" style="width:18px; height:18px;"></i> </button> <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"> <i data-lucide="menu" style="width:24px; height:24px;"></i> </button>
+    <div style="display:flex; gap:8px; align-items:center;">
+     <button class="dark-toggle" id="darkToggleMobile" aria-label="Toggle dark mode" style="display:none;"> <i data-lucide="sun" style="width:18px; height:18px;"></i> </button>
+     <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"> <i data-lucide="menu" style="width:24px; height:24px;"></i> </button>
+     <button class="btn-secondary" style="padding:8px 18px; font-size:0.8rem; display:inline-flex;" id="authBtn"> <span id="authBtnIcon"><i data-lucide="log-in" style="width:16px; height:16px;"></i></span> <span id="authBtnText">Đăng Nhập</span> </button>
+     <div class="user-menu" id="userMenu" style="display:none;">
+      <button class="avatar-btn" id="userAvatarBtn" aria-haspopup="true" aria-expanded="false">
+       <span class="avatar-initials">AD</span>
+      </button>
+      <div class="user-dropdown" id="userDropdown" role="menu" aria-label="User menu">
+       <button class="user-item" id="menuDarkToggle"><i data-lucide="moon" style="width:16px; height:16px;"></i> <span id="menuThemeText">Chế độ sáng/tối</span></button>
+       <div class="user-sep"></div>
+       <button class="user-item" id="menuLangVi"><span>Tiếng Việt</span></button>
+       <button class="user-item" id="menuLangEn"><span>English</span></button>
+       <div class="user-sep"></div>
+       <button class="user-item" id="menuLogout"><i data-lucide="log-out" style="width:16px; height:16px;"></i> <span id="menuLogoutText">Đăng xuất</span></button>
+      </div>
+     </div>
     </div>
    </div>
 
-   <!--Nơi lưu thanh header-->>
+   <!--Nơi lưu thanh header-->
 
    
    <div class="mobile-menu" id="mobileMenu" role="menu"><a href="#home" data-i18n="nav.home">Home</a> <a href="#about" data-i18n="nav.about">About</a> <a href="#courses" data-i18n="nav.courses">Courses</a> <a href="#source-code" data-i18n="nav.source">Source Code</a> <a href="#contact" data-i18n="nav.contact">Contact</a> <a href="#" id="settingsMenuMobile" data-i18n="nav.settings">Settings</a> <a href="#" id="authMenuMobile"><span id="authMenuMobileText">Đăng nhập</span></a> <a href="#" id="adminBtnMobile" style="color:var(--accent-2);" data-i18n="nav.adminDashboard">Admin Dashboard</a>
@@ -151,12 +151,8 @@
           <i data-lucide="briefcase" style="width:18px; height:18px;"></i>
          </div>
          <div>
-          <div class="exp-title">
-           Full-stack Web Development
-          </div>
-          <div class="exp-desc">
-           End-to-end application development with modern stack
-          </div>
+          <div class="exp-title" data-i18n="exp.fs.title">Full–stack Web Development</div>
+          <div class="exp-desc" data-i18n="exp.fs.desc">End-to-end application development with modern stack</div>
          </div>
         </div>
         <div class="exp-item">
@@ -164,12 +160,8 @@
           <i data-lucide="graduation-cap" style="width:18px; height:18px;"></i>
          </div>
          <div>
-          <div class="exp-title">
-           Programming Instructor
-          </div>
-          <div class="exp-desc">
-           Teaching Python, Web Dev, and software engineering
-          </div>
+          <div class="exp-title" data-i18n="exp.inst.title">Programming Instructor</div>
+          <div class="exp-desc" data-i18n="exp.inst.desc">Teaching Python, Web Dev, and software engineering</div>
          </div>
         </div>
         <div class="exp-item">
@@ -177,12 +169,8 @@
           <i data-lucide="database" style="width:18px; height:18px;"></i>
          </div>
          <div>
-          <div class="exp-title">
-           Backend &amp; Database Design
-          </div>
-          <div class="exp-desc">
-           Designing efficient systems with Flask and SQL
-          </div>
+          <div class="exp-title" data-i18n="exp.backend.title">Backend &amp; Database Design</div>
+          <div class="exp-desc" data-i18n="exp.backend.desc">Designing efficient systems with Flask and SQL</div>
          </div>
         </div>
        </div>
@@ -322,18 +310,17 @@
       <div class="qr-placeholder" id="qrDisplay"></div>
       <div class="qr-label" data-i18n="payment.qrLabel">Scan to pay via banking app</div>
      </div>
-     <p style="text-align:center; color:var(--text-secondary); font-size:0.8rem;" data-i18n="payment.qrNote">This is a sample QR. In production, a real QR would be generated.</p>
     </div>
     <div id="tabBank" style="display:none;">
      <div class="bank-info">
       <div class="bank-row">
-       <span class="bank-label" data-i18n="payment.bank.bank">Bank</span><span class="bank-value">Vietcombank</span>
+       <span class="bank-label" data-i18n="payment.bank.bank">Bank</span><span class="bank-value">MBank</span>
       </div>
       <div class="bank-row">
-       <span class="bank-label" data-i18n="payment.bank.account">Account</span><span class="bank-value">1234567890</span>
+       <span class="bank-label" data-i18n="payment.bank.account">Account</span><span class="bank-value">3355555789</span>
       </div>
       <div class="bank-row">
-       <span class="bank-label" data-i18n="payment.bank.name">Name</span><span class="bank-value">TRAN MANH</span>
+       <span class="bank-label" data-i18n="payment.bank.name">Name</span><span class="bank-value">TRAN DUC MANH</span>
       </div>
       <div class="bank-row">
        <span class="bank-label" data-i18n="payment.bank.amount">Amount</span><span class="bank-value" id="bankAmount">—</span>
@@ -478,12 +465,43 @@
       </div>
      </div>
     </div>
+   <div class="admin-table-wrap" style="margin-top:24px;">
+    <div class="admin-table-header">
+     Reset Password (Admin)
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+     <div>
+      <label style="font-size:0.85rem; color:var(--text-secondary);">Admin Secret</label>
+      <input class="form-input" id="adminSecretInput" type="text" placeholder="paste ADMIN_SECRET">
+     </div>
+     <div>
+      <label style="font-size:0.85rem; color:var(--text-secondary);">Username</label>
+      <input class="form-input" id="resetUserInput" type="text" placeholder="username">
+     </div>
+     <div>
+      <label style="font-size:0.85rem; color:var(--text-secondary);">New Password</label>
+      <input class="form-input" id="resetPassInput" type="password" placeholder="new password">
+     </div>
+     <div>
+      <label style="font-size:0.85rem; color:var(--text-secondary);">Confirm Password</label>
+      <input class="form-input" id="resetConfirmInput" type="password" placeholder="confirm password">
+     </div>
+    </div>
+    <div style="margin-top:12px;">
+     <button class="btn-primary" id="resetSubmitBtn" style="padding:8px 16px; font-size:0.85rem;">
+      Reset Password
+     </button>
+     <div id="resetMsg" style="margin-top:8px; font-size:0.9rem; color:var(--text-secondary);"></div>
+    </div>
+   </div>
    </div>
   </div><!-- Toast -->
   <div class="toast" id="toast">
    <i data-lucide="check-circle" style="width:18px; height:18px;"></i> <span id="toastMsg"></span>
   </div>
-  <script defer src="auth.js"></script>
-  <script defer src="conifg.js"></script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e22bc7ee0d830fc',t:'MTc3NDQ5MjI1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <script defer src="js/conifg.js"></script>
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/auth.js"></script>
+ </body>
 </html>

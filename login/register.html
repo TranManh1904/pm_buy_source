@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng nhập Admin</title>
+  <title>Đăng ký tài khoản</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="login.css">
@@ -12,27 +12,29 @@
   <main class="login-wrap">
    <div class="login-card">
     <div class="login-brand">ManhDev</div>
-    <h1 class="login-title">Đăng nhập Admin</h1>
-    <p class="login-subtitle">Tạm thời demo: admin / admin</p>
-    <form id="loginForm" class="login-form" autocomplete="off">
+    <h1 class="login-title">Đăng ký tài khoản</h1>
+    <form id="registerForm" class="login-form" autocomplete="off">
      <div class="form-group">
       <label class="form-label" for="username">Tài khoản</label>
-      <input class="form-input" id="username" type="text" placeholder="admin" required>
+      <input class="form-input" id="username" type="text" placeholder="nhập tài khoản" required>
      </div>
      <div class="form-group">
       <label class="form-label" for="password">Mật khẩu</label>
-      <input class="form-input" id="password" type="password" placeholder="admin" required>
+      <input class="form-input" id="password" type="password" placeholder="nhập mật khẩu" required>
      </div>
-     <div class="login-error" id="loginError" style="display:none;"></div>
-     <button class="btn-primary" type="submit">Đăng nhập</button> <!--khi ấn nút submit -> chuyển qua file login.js ở dòng 23 để thực hiện sự kiện-->
+     <div class="form-group">
+      <label class="form-label" for="confirm">Xác nhận mật khẩu</label>
+      <input class="form-input" id="confirm" type="password" placeholder="nhập lại mật khẩu" required>
+     </div>
+     <div class="login-error" id="registerError" style="display:none;"></div>
+     <button class="btn-primary" type="submit">Đăng ký</button>
     </form>
     <div style="margin-top:10px;">
-     <a class="login-back" href="register.html">Chưa có tài khoản? Đăng ký</a>
+     <a class="login-back" href="login.html">Đã có tài khoản? Đăng nhập</a>
     </div>
     <a class="login-back" href="../index.html">← Quay về trang chủ</a>
    </div>
   </main>
-  <script defer src="../js/auth.js"></script>
-  <script defer src="login.js"></script>
+  <script defer src="register.js"></script>
  </body>
 </html>

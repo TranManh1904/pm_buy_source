@@ -1,6 +1,4 @@
-// ======================================
-// XỬ LÝ ĐĂNG NHẬP (BẢN DỄ HIỂU)
-// ======================================
+// XỬ LÝ ĐĂNG NHẬP (BẢN DỄ HIỂU
 
 (function () {
 
@@ -81,6 +79,11 @@
     dangXuat,
     chuyenDenLogin,
     layTrangQuayLai,
+    isLoggedIn: daDangNhap,
+    login: dangNhap,
+    logout: dangXuat,
+    gotoLogin: chuyenDenLogin,
+    getReturnUrl: layTrangQuayLai,
   };
 
 })();

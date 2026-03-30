@@ -1,6 +1,4 @@
-// ================================
-// TRANG ĐĂNG NHẬP (BẢN DỄ HIỂU)
-// ================================
+// TRANG ĐĂNG NHẬP 
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -26,37 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if (inputTaiKhoan) inputTaiKhoan.value = 'admin';
   if (inputMatKhau) inputMatKhau.value = 'admin';
 
-  // Bắt sự kiện khi bấm nút ĐĂNG NHẬP
-  formDangNhap.addEventListener('submit', (suKien) => {
-    
-    // Ngăn reload trang
+  formDangNhap.addEventListener('submit', async (suKien) => {
     suKien.preventDefault();
-
-    // Ẩn lỗi cũ
-    anLoi();
-
-    // Kiểm tra có file auth.js không
-    if (!window.Auth || typeof window.Auth.login !== 'function') {
-      hienThiLoi('Thiếu file auth.js, kiểm tra lại nhé!');
-      return;
-    }
-
-    // Lấy dữ liệu người dùng nhập
-    const taiKhoan = inputTaiKhoan.value;
+    const taiKhoan = inputTaiKhoan.value.trim();
     const matKhau = inputMatKhau.value;
-
-    // Gọi hàm đăng nhập 
-    const dangNhapThanhCong = window.Auth.login(taiKhoan, matKhau);
-
-    // Nếu sai
-    if (!dangNhapThanhCong) {
+    try {
+      const res = await fetch('http://127.0.0.1:8001/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: taiKhoan, password: matKhau }),
+      });
+      const data = await res.json();
+      if (data && data.thanh_cong) {
+        localStorage.setItem('admin_auth', '1');
+        const trangCanQuayLai = window.Auth && typeof window.Auth.getReturnUrl === 'function' ? window.Auth.getReturnUrl() : '../index.html';
+        window.location.href = trangCanQuayLai || '../index.html';
+        return;
+      }
       hienThiLoi('Sai tài khoản hoặc mật khẩu!');
-      return;
+    } catch (e) {
+      hienThiLoi('Không kết nối được máy chủ. Hãy chạy python3 server.py');
     }
-
-    // Nếu đúng → chuyển trang
-    const trangCanQuayLai = window.Auth.getReturnUrl();
-    window.location.href = trangCanQuayLai || '../index.html';
   });
 
 });
